@@ -23,3 +23,13 @@
 - Ejecutar `npm run watch`
 - Ejecutar `php artisan serve`
 
+## Tabla de contenidos
+ [Demo](http://pruebatecnicaapp.herokuapp.com)
+ Credenciales login:
+    Email: joyce@joyce.com
+    Password: joyce
+O puede registrarse para entrar con sus propias credenciales.
+Cabe recalcar que cuando se entra el listado de usuarios, no se podra borrar el usuario con el que se loggeo para evitar
+problemas de peticiones denegadas.
+
+ [Repo](https://github.com/jebenite/pruebaTecnica)
