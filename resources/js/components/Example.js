@@ -272,7 +272,7 @@ export default class Example extends Component {
                         </Tooltip>
                     </Col>
                 </Row>
-                    <Table loading={this.state.loading} columns={this.columns} dataSource={this.state.users} pagination={false}/>
+                    <Table scroll={{x:true}} loading={this.state.loading} columns={this.columns} dataSource={this.state.users} pagination={false}/>
                     <Pagination defaultCurrent={1} total={this.state.totalUser} defaultPageSize={15} onChange={this.changePage}/>
                 </Card></span>):''
             }
