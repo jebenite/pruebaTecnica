@@ -125,24 +125,12 @@ export default class User extends Component {
           <Form.Item
             label="Specialist"
             name="specialist"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your specialist!',
-              },
-            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             label="Phone"
             name="phone"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your phone!',
-              },
-            ]}
           >
             <Input />
           </Form.Item>
