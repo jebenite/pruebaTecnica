@@ -115,7 +115,8 @@ export default class Example extends Component {
             this.setState({
                 loading: true
             })
-            var url = new URL('http://localhost:8000/api/usuarios'),
+            //var url = new URL('http://localhost:8000/api/usuarios'),
+            var url = new URL('https://pruebatecnicaapp.herokuapp.com/api/usuarios'),
             params = {
                 busqueda: search,
             };
@@ -149,7 +150,8 @@ export default class Example extends Component {
     }
     async changePage(event){
         let search= this.state.search.trim();
-        var url = new URL('http://localhost:8000/api/usuarios'),
+        //var url = new URL('http://localhost:8000/api/usuarios'),
+        var url = new URL(' https://pruebatecnicaapp.herokuapp.com/api/usuarios'),
         params = {
             busqueda: search,
             page: event
