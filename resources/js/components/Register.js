@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css'; 
-import { Form, Input, Button, notification } from 'antd';
+import { Form, Input, Button, notification, Card } from 'antd';
 import { SmileOutlined, WarningOutlined } from '@ant-design/icons';
 import url from './url';
 const messageError = 'error';
@@ -39,7 +39,7 @@ export default class Regsiter extends Component {
   }
   componentDidMount() {
     if(localStorage["appState"]){
-      window.location.href = "/";
+      this.props.history.push('/dashboard');
     }else{
       this.setState({
         isLogginInNot: true
@@ -115,7 +115,7 @@ export default class Regsiter extends Component {
         return (
           <span>
             {this.state.isLogginInNot?
-            (<Form
+            (<Card title="Register" style={{ width: '100%' }}><Form
               key={this.state.keyForm}
           {...layout}
           name="basic"
@@ -190,13 +190,10 @@ export default class Regsiter extends Component {
               Submit
             </Button>
           </Form.Item>
-        </Form>):''
+        </Form></Card>):''
       }
         </span>
         );
     }
 }
 
-if (document.getElementById('regsiter')) {
-    ReactDOM.render(<Regsiter />, document.getElementById('regsiter'));
-}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css'; 
 import Formulario from './Formulario'
-import { Form, Input, Button, notification, Modal} from 'antd';
+import { Form, Input, Button, notification, Modal, Card} from 'antd';
 import { SmileOutlined, WarningOutlined } from '@ant-design/icons';
 import url from './url';
 
@@ -39,7 +39,7 @@ export default class Login extends Component {
   }
   componentDidMount() {
     if(localStorage["appState"]){
-      window.location.href = "/";
+      this.props.history.push('/dashboard');
     }
     else{
       this.setState({
@@ -64,10 +64,9 @@ export default class Login extends Component {
         this.openNotification('Error', data.mensaje, true);
       }
       else{
-        localStorage["appState"] = data.datos;
-        localStorage["dataUser"] = JSON.stringify(data.dataUser);
+        await this.guardarStorage(data);
         this.openNotification('Success', data.mensaje, false);
-        window.location.href = "/";
+        this.props.history.push('/dashboard');
       }
       this.setState({
         loadingLogin: false
@@ -88,7 +87,15 @@ export default class Login extends Component {
         showModal: false
       })
   }
-
+  guardarStorage(data) {
+    var promise = new Promise(function(resolve) { 
+      localStorage["appState"] = data.datos;
+      localStorage["dataUser"] = JSON.stringify(data.dataUser);
+      resolve(); 
+    }); 
+    return promise;
+}
+  
     render() {
         return (
           <span>
@@ -101,12 +108,14 @@ export default class Login extends Component {
           >
             <Formulario handleCancel={this.handleCancel}/>
           </Modal>
-            {this.state.isLogginInNot?
-            (<Form
+          {this.state.isLogginInNot?
+            (<Card title="Login" style={{ width: '100%' }}>
+          <Form
           {...layout}
           name="basic"
           onFinish={this.onFinish}
         >
+          
           <Form.Item
             label="Email"
             name="email"
@@ -142,13 +151,11 @@ export default class Login extends Component {
             </Button>
             <Button type="link" onClick={this.showModal}>Update Password</Button>
           </Form.Item>
-        </Form>):''
+        </Form>
+          </Card>):''
           }
+            
         </span>
         );
     }
-}
-
-if (document.getElementById('login')) {
-    ReactDOM.render(<Login />, document.getElementById('login'));
 }

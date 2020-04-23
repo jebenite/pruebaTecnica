@@ -6,7 +6,7 @@ import { SearchOutlined, DeleteOutlined, EditOutlined, SmileOutlined, WarningOut
 import User from './User';
 import url from './url';
 
-const bearer = 'Bearer ' + localStorage["appState"];
+const bearer = 'Bearer ';
 
 export default class Example extends Component {
     constructor(props){
@@ -84,10 +84,11 @@ export default class Example extends Component {
             this.setState({
                 loadingLogOut: true
             })
+            var header= bearer + localStorage["appState"];
             localStorage.clear();
             let res = await fetch(`${url}/api/logout`,{
                 headers: {
-                'Authorization': bearer,
+                'Authorization': header,
                 }
             });
             let data = await res.json();
@@ -122,9 +123,10 @@ export default class Example extends Component {
             };
             Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
             try {
+                var header= bearer + localStorage["appState"];
                 let res = await fetch(url,{
                     headers:{
-                    'Authorization': bearer,
+                    'Authorization': header,
                     }
                 });
                   let data = await res.json();
@@ -158,9 +160,10 @@ export default class Example extends Component {
         };
         Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
         try {
+            var header= bearer + localStorage["appState"];
             let res = await fetch(url,{
                 headers:{
-                'Authorization': bearer,
+                'Authorization': header,
                 }
             });
                 let data = await res.json();
@@ -175,11 +178,12 @@ export default class Example extends Component {
     }
     async handleDelete(id){
         try {
+            var header= bearer + localStorage["appState"];
             let res = await fetch(`${url}/api/usuarios/${id}`, {
                 method: 'DELETE',
                 headers:{
                   'Content-Type': 'application/json',
-                  'Authorization': bearer,
+                  'Authorization': header,
                 }
               })
               let data = await res.json();
@@ -214,13 +218,14 @@ export default class Example extends Component {
         }
     }
     async loadUsers(){
+        var header= bearer + localStorage["appState"];
         this.setState({
             loading: true
         })
         try {
             let res = await fetch(`${url}/api/usuarios`,{
                 headers: {
-                'Authorization': bearer,
+                'Authorization': header,
                 }
             });
             // almacenamos la respeusta en data
@@ -249,17 +254,17 @@ export default class Example extends Component {
                 {this.state.isLogginIn?
                 (
                     <span>
-                        <Anchor>
-            <PageHeader
-                title={this.state.dataUser.name}
-                className="site-page-header"
-                subTitle={this.state.dataUser.specialist}
-                avatar={{ src: 'https://avatars1.githubusercontent.com/u/8186664?s=460&v=4' }}
-                extra={[
-                    <Button key="log" loading={this.state.loadingLogOut} type="link" onClick={this.logout}>Log out</Button>
-                  ]}
-            >
-            </PageHeader>
+            <Anchor>
+                <PageHeader
+                    title={this.state.dataUser.name}
+                    className="site-page-header"
+                    subTitle={this.state.dataUser.specialist}
+                    avatar={{ src: 'https://avatars1.githubusercontent.com/u/8186664?s=460&v=4' }}
+                    extra={[
+                        <Button key="log" loading={this.state.loadingLogOut} type="link" onClick={this.logout}>Log out</Button>
+                    ]}
+                >
+                </PageHeader>
             </Anchor>
                 <Card size="small" title="Users">
                 <Row>
@@ -282,6 +287,3 @@ export default class Example extends Component {
     }
 }
 
-if (document.getElementById('example')) {
-    ReactDOM.render(<Example />, document.getElementById('example'));
-}
