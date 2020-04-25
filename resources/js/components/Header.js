@@ -7,22 +7,11 @@ import { connect } from "react-redux";
 class Header extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isLogginIn: false,
-        };
+       
     }
-    componentDidMount() {
-        if (localStorage["appState"]) {
-            this.setState({
-                isLogginIn: true
-              })
-        }
-      }
     render() {
         return (
-            <Anchor>
-                {this.props.isLogged || this.state.isLogginIn?
-                '':<PageHeader
+            <Anchor><PageHeader
                 title='Prueba'
                 className="site-page-header"
                 extra={[
@@ -30,9 +19,8 @@ class Header extends Component {
                     <Link key="register" to="/register">Register</Link>
                 ]}
             >
-            </PageHeader>}
-            </Anchor>
-                    
+            </PageHeader>
+            </Anchor>     
         );
     }
 }

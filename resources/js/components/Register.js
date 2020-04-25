@@ -4,6 +4,8 @@ import 'antd/dist/antd.css';
 import { Form, Input, Button, notification, Card } from 'antd';
 import { SmileOutlined, WarningOutlined } from '@ant-design/icons';
 import url from './url';
+import Header from './Header';
+
 const messageError = 'error';
 const layout = {
   labelCol: {
@@ -117,7 +119,10 @@ export default class Regsiter extends Component {
     return (
       <span>
         {this.state.isLogginInNot ?
-          (<Card title="Register" style={{ width: '100%' }}><Form
+          (
+            <span>
+              <Header/>
+          <Card title="Register" style={{ width: '100%' }}><Form
             key={this.state.keyForm}
             {...layout}
             name="basic"
@@ -192,7 +197,9 @@ export default class Regsiter extends Component {
                 Submit
             </Button>
             </Form.Item>
-          </Form></Card>) : ''
+          </Form></Card>
+          </span>
+          ) : ''
         }
       </span>
     );

@@ -95,7 +95,7 @@ class Example extends Component {
             if (data.status == '200') {
                 this.openNotification('Success', data.mensaje, false);
                 this.props.dispatch({type:'DESLOGEADO'});
-                this.props.history.push('/login');
+                this.props.history.push('/');
             }
             else {
                 this.openNotification('Error', 'Something went wrong', false);
@@ -196,6 +196,7 @@ class Example extends Component {
     // realizamos la peticion
     async componentDidMount() {
         if (localStorage["appState"]) {
+            this.props.dispatch({type:'LOGEADO'});
             this.setState({ dataUser: JSON.parse(localStorage["dataUser"]) });
             this.setState({
                 isLogginIn: true
@@ -203,7 +204,7 @@ class Example extends Component {
             await this.loadUsers();
         }
         else {
-            this.props.history.push('/login');
+            this.props.history.push('/');
         }
     }
     handleCancel() {

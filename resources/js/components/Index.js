@@ -5,7 +5,7 @@ import Login from './Login';
 import history from './history';
 import Regsiter from './Register';
 import Example from './Example';
-import Header from './Header';
+import Main from './Main';
 import { Provider } from 'react-redux';
 import store from '../store';
 import { connect,useSelector,useDispatch } from "react-redux";
@@ -14,12 +14,15 @@ import { connect,useSelector,useDispatch } from "react-redux";
 class Index extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isLogginIn: false,
+        };
     }
     render() {
         return (
             <Provider store={store}>
                 <Router>
-                    <Header/>
+                    <Route history={history} path="/" exact component={Main} />
                     <Route history={history} path="/login" exact component={Login} />
                     <Route history={history} path="/register" exact component={Regsiter} />
                     <Route history={history} path="/dashboard" exact component={Example} />

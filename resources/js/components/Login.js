@@ -6,6 +6,7 @@ import { SmileOutlined, WarningOutlined } from '@ant-design/icons';
 import url from './url';
 import updateWord from '../store/action';
 import { connect } from "react-redux";
+import Header from './Header';
 
 const layout = {
   labelCol: {
@@ -116,7 +117,10 @@ class Login extends Component {
           <Formulario handleCancel={this.handleCancel} />
         </Modal>
         {this.state.isLogginInNot ?
-          (<Card title="Login" style={{ width: '100%' }}>
+          (
+          <span>
+          <Header/>
+          <Card title="Login" style={{ width: '100%' }}>
             <Form
               {...layout}
               name="basic"
@@ -159,7 +163,9 @@ class Login extends Component {
               <Button type="link" onClick={this.showModal}>Update Password</Button>
               </Form.Item>
             </Form>
-          </Card>) : ''
+          </Card>
+          </span>
+          ) : ''
         }
 
       </span>
