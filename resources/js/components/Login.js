@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import Formulario from './Formulario'
 import { Form, Input, Button, notification, Modal, Card } from 'antd';
 import { SmileOutlined, WarningOutlined } from '@ant-design/icons';
 import url from './url';
+import updateWord from '../store/action';
+import { connect } from "react-redux";
 
 const layout = {
   labelCol: {
@@ -20,7 +21,7 @@ const tailLayout = {
     span: 20,
   },
 };
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -31,8 +32,10 @@ export default class Login extends Component {
     this.onFinish = this.onFinish.bind(this);
     this.showModal = this.showModal.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+
   }
   showModal() {
+    //this.props.dispatch(updateWord(4));
     this.setState({
       showModal: true
     })
@@ -65,6 +68,7 @@ export default class Login extends Component {
       }
       else {
         await this.guardarStorage(data);
+        this.props.dispatch({type:'LOGEADO'});
         this.openNotification('Success', data.mensaje, false);
         this.props.history.push('/dashboard');
       }
@@ -95,8 +99,11 @@ export default class Login extends Component {
     });
     return promise;
   }
-
   render() {
+    /*const counter= useSelector(state=>state.count);
+    const logginIs= useSelector(state=>state.loggin);
+    const dispatch= useDispatch();*/
+
     return (
       <span>
         <Modal
@@ -149,7 +156,7 @@ export default class Login extends Component {
                 <Button type="primary" htmlType="submit" loading={this.state.loadingLogin}>
                   Submit
             </Button>
-                <Button type="link" onClick={this.showModal}>Update Password</Button>
+              <Button type="link" onClick={this.showModal}>Update Password</Button>
               </Form.Item>
             </Form>
           </Card>) : ''
@@ -159,3 +166,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default connect()(Login);

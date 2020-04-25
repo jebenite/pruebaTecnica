@@ -5,10 +5,10 @@ import { Table, Card, Input, Row, Col, Tooltip, Button, Popconfirm, Pagination, 
 import { SearchOutlined, DeleteOutlined, EditOutlined, SmileOutlined, WarningOutlined } from '@ant-design/icons';
 import User from './User';
 import url from './url';
-
+import { connect } from "react-redux";
 const bearer = 'Bearer ';
 
-export default class Example extends Component {
+class Example extends Component {
     constructor(props) {
         super(props)
         // definimos el state
@@ -94,7 +94,8 @@ export default class Example extends Component {
             let data = await res.json();
             if (data.status == '200') {
                 this.openNotification('Success', data.mensaje, false);
-                window.location.href = "/login";
+                this.props.dispatch({type:'DESLOGEADO'});
+                this.props.history.push('/login');
             }
             else {
                 this.openNotification('Error', 'Something went wrong', false);
@@ -116,11 +117,11 @@ export default class Example extends Component {
             this.setState({
                 loading: true
             })
-            //var url = new URL('http://localhost:8000/api/usuarios'),
-            var url = new URL('http://pruebatecnicaapp.herokuapp.com/api/usuarios'),
-                params = {
-                    busqueda: search,
-                };
+            var url = new URL('http://localhost:8000/api/usuarios');
+            //var url = new URL('http://pruebatecnicaapp.herokuapp.com/api/usuarios');
+            var params = {
+                busqueda: search,
+            };
             Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
             try {
                 var header = bearer + localStorage["appState"];
@@ -152,8 +153,8 @@ export default class Example extends Component {
     }
     async changePage(event) {
         let search = this.state.search.trim();
-        //var url = new URL('http://localhost:8000/api/usuarios'),
-        var url = new URL(' http://pruebatecnicaapp.herokuapp.com/api/usuarios'),
+        var url = new URL('http://localhost:8000/api/usuarios'),
+            //var url = new URL(' http://pruebatecnicaapp.herokuapp.com/api/usuarios'),
             params = {
                 busqueda: search,
                 page: event
@@ -202,7 +203,7 @@ export default class Example extends Component {
             await this.loadUsers();
         }
         else {
-            window.location.href = "/login";
+            this.props.history.push('/login');
         }
     }
     handleCancel() {
@@ -287,3 +288,4 @@ export default class Example extends Component {
     }
 }
 
+export default connect()(Example);

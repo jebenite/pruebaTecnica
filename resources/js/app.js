@@ -13,5 +13,3 @@ require('./bootstrap');
  */
 
 require('./components/Index');
-require('./components/Login');
-require('./components/Register');

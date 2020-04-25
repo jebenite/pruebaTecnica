@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Form, Input, Button, notification, Divider } from 'antd';
 import { SmileOutlined, WarningOutlined } from '@ant-design/icons';
 import url from './url';
-const bearer = 'Bearer ' + localStorage["appState"];
 const messageError = 'error';
 
 const layout = {
@@ -54,6 +53,7 @@ export default class User extends Component {
     try {
       this.setState({ messageErrorEmail: '', errorEmail: '', loading: true });
       values.id = this.props.userData.id;
+      const bearer = 'Bearer ' + localStorage["appState"];
       let res = await fetch(`${url}/api/usuarios/${this.props.userData.id}`, {
         method: 'PUT',
         body: JSON.stringify(values),
