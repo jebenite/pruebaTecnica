@@ -8,7 +8,6 @@ class Main extends Component {
         super(props);
     }
     async componentDidMount() {
-        console.log(11111111);
         if (localStorage["appState"]) {
             this.props.history.push('/dashboard');
         }
