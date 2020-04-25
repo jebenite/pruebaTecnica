@@ -104,7 +104,6 @@ class UsuarioController extends Controller
     public function index()
     {
         try { 
-            $user= Auth::user();
             $busqueda = Input::get('busqueda');
             $usuarios= User::
             where(function($query) use ($busqueda){

@@ -56,7 +56,7 @@
         </style>
     </head>
     <body>
-        <div id="example"></div>
+        <div id="index"></div>
     </body>
     <script type="text/javascript" src="js/app.js"></script>
 </html>

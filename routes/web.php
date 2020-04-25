@@ -11,11 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('{reactRoutes}', function () {
+    return view('welcome'); 
+})->where('reactRoutes', '^((?!api).)*$');
 
-Auth::routes();
-
-
-Route::get('/home', 'HomeController@index')->name('home');
