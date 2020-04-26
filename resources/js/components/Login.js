@@ -41,16 +41,6 @@ class Login extends Component {
       showModal: true
     })
   }
-  componentDidMount() {
-    if (localStorage["appState"]) {
-      this.props.history.push('/dashboard');
-    }
-    else {
-      this.setState({
-        isLogginInNot: true
-      })
-    }
-  }
   async onFinish(values) {
     try {
       this.setState({
@@ -71,7 +61,6 @@ class Login extends Component {
         await this.guardarStorage(data);
         this.props.dispatch({type:'LOGEADO'});
         this.openNotification('Success', data.mensaje, false);
-        this.props.history.push('/dashboard');
       }
       this.setState({
         loadingLogin: false
@@ -116,8 +105,6 @@ class Login extends Component {
         >
           <Formulario handleCancel={this.handleCancel} />
         </Modal>
-        {this.state.isLogginInNot ?
-          (
           <span>
           <Header/>
           <Card title="Login" style={{ width: '100%' }}>
@@ -165,7 +152,6 @@ class Login extends Component {
             </Form>
           </Card>
           </span>
-          ) : ''
         }
 
       </span>
