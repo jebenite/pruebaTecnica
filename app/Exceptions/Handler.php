@@ -46,6 +46,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \InvalidArgumentException) {
+            if($exception->getMessage()=='Route [login] not defined.'){
+                $noticia=[
+                    'titulo' => 'Ups!',
+                    'mensaje' => 'You dont have permissions',
+                ];
+                return response()->json($noticia, 401);
+            }
+        }
         return parent::render($request, $exception);
     }
 }
