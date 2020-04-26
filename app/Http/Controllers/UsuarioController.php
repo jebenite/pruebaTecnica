@@ -11,6 +11,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\NewPassWordRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use Exception;
 
 class UsuarioController extends Controller
 {
