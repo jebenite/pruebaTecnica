@@ -16,7 +16,6 @@ class Example extends Component {
             loadingLogOut: false,
             keyForm: 1,
             showModal: false,
-            isLogginIn: false,
             totalUser: 0,
             users: [],
             loading: true,
@@ -95,7 +94,6 @@ class Example extends Component {
             if (data.status == '200') {
                 this.openNotification('Success', data.mensaje, false);
                 this.props.dispatch({type:'DESLOGEADO'});
-                this.props.history.push('/');
             }
             else {
                 this.openNotification('Error', 'Something went wrong', false);
@@ -153,7 +151,7 @@ class Example extends Component {
     }
     async changePage(event) {
         let search = this.state.search.trim();
-        //var url = new URL('http://localhost:8000/api/usuarios'),
+            //var url = new URL('http://localhost:8000/api/usuarios'),
             var url = new URL(' https://pruebatecnicaapp.herokuapp.com/api/usuarios'),
             params = {
                 busqueda: search,
@@ -196,15 +194,8 @@ class Example extends Component {
     // realizamos la peticion
     async componentDidMount() {
         if (localStorage["appState"]) {
-            this.props.dispatch({type:'LOGEADO'});
             this.setState({ dataUser: JSON.parse(localStorage["dataUser"]) });
-            this.setState({
-                isLogginIn: true
-            })
             await this.loadUsers();
-        }
-        else {
-            this.props.history.push('/');
         }
     }
     handleCancel() {
@@ -253,8 +244,6 @@ class Example extends Component {
                 >
                     <User handleCancel={this.handleCancel} loadUsers={this.loadUsers} userData={this.state.userData} keyForm={this.state.keyForm} />
                 </Modal>
-                {this.state.isLogginIn ?
-                    (
                         <span>
                             <Anchor>
                                 <PageHeader
@@ -281,8 +270,7 @@ class Example extends Component {
                                 </Row>
                                 <Table scroll={{ x: true }} loading={this.state.loading} columns={this.columns} dataSource={this.state.users} pagination={false} />
                                 <Pagination defaultCurrent={1} total={this.state.totalUser} defaultPageSize={15} onChange={this.changePage} />
-                            </Card></span>) : ''
-                }
+                            </Card></span>
 
             </div>
         );

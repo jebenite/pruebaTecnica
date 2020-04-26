@@ -9,23 +9,23 @@ import Main from './Main';
 import { Provider } from 'react-redux';
 import store from '../store';
 import { connect,useSelector,useDispatch } from "react-redux";
+import requireAuth from './requireAuth';
+import requireAuthLogin from './requireAuthLogin';
 //store.dispatch({ type: "INCREMENT", otraVar:'oooo' });
 
 class Index extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isLogginIn: false,
-        };
     }
     render() {
         return (
             <Provider store={store}>
                 <Router>
-                    <Route history={history} path="/" exact component={Main} />
-                    <Route history={history} path="/login" exact component={Login} />
-                    <Route history={history} path="/register" exact component={Regsiter} />
-                    <Route history={history} path="/dashboard" exact component={Example} />
+                    <Route history={history} path="/" exact component={requireAuthLogin(Main)} />
+                    <Route history={history} path="/login" exact component={requireAuthLogin(Login)} />
+                    <Route history={history} path="/register" exact component={requireAuthLogin(Regsiter)} />
+                    {/*<Route history={history} path="/dashboard" exact component={Example} />*/}
+                    <Route history={history} path="/dashboard" exact component={requireAuth(Example)} />
                 </Router>
             </Provider>
         );

@@ -25,10 +25,4 @@ class Header extends Component {
     }
 }
 
-function mapStateToProps(state) {
-  return {
-    isLogged: state.loggin
-  }
-}
-
-export default connect(mapStateToProps)(Header);
+export default Header;

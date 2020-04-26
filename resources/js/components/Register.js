@@ -39,15 +39,6 @@ export default class Regsiter extends Component {
     this.onFinish = this.onFinish.bind(this);
     this.onFinishFailed = this.onFinishFailed.bind(this);
   }
-  componentDidMount() {
-    if (localStorage["appState"]) {
-      this.props.history.push('/dashboard');
-    } else {
-      this.setState({
-        isLogginInNot: true
-      })
-    }
-  }
   openNotification(title, description, isError) {
     notification.open({
       message: title,
@@ -117,9 +108,6 @@ export default class Regsiter extends Component {
   }
   render() {
     return (
-      <span>
-        {this.state.isLogginInNot ?
-          (
             <span>
               <Header/>
           <Card title="Register" style={{ width: '100%' }}><Form
@@ -199,9 +187,6 @@ export default class Regsiter extends Component {
             </Form.Item>
           </Form></Card>
           </span>
-          ) : ''
-        }
-      </span>
     );
   }
 }

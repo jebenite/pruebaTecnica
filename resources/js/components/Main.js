@@ -7,11 +7,6 @@ class Main extends Component {
     constructor(props) {
         super(props);
     }
-    async componentDidMount() {
-        if (localStorage["appState"]) {
-            this.props.history.push('/dashboard');
-        }
-    }
     render() {
         return (
                 <span>
@@ -20,12 +15,6 @@ class Main extends Component {
                 </span>
         );
     }
-}
-
-function mapStateToProps(state) {
-  return {
-    isLogged: state.loggin
-  }
 }
 
 export default Main;
