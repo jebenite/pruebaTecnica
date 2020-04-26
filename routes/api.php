@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::post('login','UsuarioController@login');
 Route::post('register','UsuarioController@store');
 Route::post('newpassword','UsuarioController@newpassword');
+Route::get('send','MailController@send');
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::apiResource('usuarios', 'UsuarioController');
