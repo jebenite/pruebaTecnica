@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route ,Switch} from 'react-router-dom'
 import Login from './Login';
 import Notfound from './Notfound';
 import history from './history';
@@ -22,11 +22,13 @@ class Index extends Component {
         return (
             <Provider store={store}>
                 <Router>
+                <Switch>
                     <Route history={history} path="/" exact component={requireAuthLogin(Main)} />
                     <Route history={history} path="/login" exact component={requireAuthLogin(Login)} />
                     <Route history={history} path="/register" exact component={requireAuthLogin(Regsiter)} />
                     <Route history={history} path="/dashboard" exact component={requireAuth(Example)} />
                     <Route path="*" exact component={Notfound}/>
+                    </Switch>
                 </Router>
             </Provider>
         );
