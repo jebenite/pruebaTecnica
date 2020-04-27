@@ -26,7 +26,7 @@ class Index extends Component {
                     <Route history={history} path="/login" exact component={requireAuthLogin(Login)} />
                     <Route history={history} path="/register" exact component={requireAuthLogin(Regsiter)} />
                     <Route history={history} path="/dashboard" exact component={requireAuth(Example)} />
-                    <Route path="*" component={Notfound}/>
+                    <Route path="*" exact component={Notfound}/>
                 </Router>
             </Provider>
         );
