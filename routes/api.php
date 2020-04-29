@@ -17,6 +17,10 @@ Route::post('login','UsuarioController@login');
 Route::post('register','UsuarioController@store');
 Route::post('newpassword','UsuarioController@newpassword');
 Route::get('send','MailController@send');
+Route::group(['middleware' => ['web']], function () {
+    Route::get('auth/facebook', 'UsuarioController@redirect');
+    Route::get('auth/facebook/callback', 'UsuarioController@callback');
+});
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::apiResource('usuarios', 'UsuarioController');

@@ -146,8 +146,9 @@ class Login extends Component {
               <Form.Item {...tailLayout}>
                 <Button type="primary" htmlType="submit" loading={this.state.loadingLogin}>
                   Submit
-            </Button>
+              </Button>
               <Button type="link" onClick={this.showModal}>Update Password</Button>
+              <Button type="link" href='/api/auth/facebook'>Facebook</Button>
               </Form.Item>
             </Form>
           </Card>
