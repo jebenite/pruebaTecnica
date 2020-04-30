@@ -32,15 +32,14 @@ class UsuarioController extends Controller
         if($finduser){
             $myRequest = new LoginRequest();
             $myRequest->replace(['email' => $finduser->email, 'password'=>'123']);
-            $this->login($myRequest, 'byId', $finduser);
-            return \Redirect::to('/?loggin=si');
+            return $this->login($myRequest, 'byId', $finduser);
+           // return \Redirect::to('/?loggin=si');
         }
         else{
             $myRequest = new Request();
             $myRequest->replace([
                 'email' => $userSocial->email, 
-                'name' => $userSocial->name, 
-                'password'=> bcrypt('123'),
+                'name' => $userSocial->name,
                 'facebook_id'=> $userSocial->id,
                 'avatar'=> $userSocial->avatar_original,
                 'register_normal'=> 0,
@@ -49,8 +48,8 @@ class UsuarioController extends Controller
             $usuario->save();
             $myRequest = new LoginRequest();
             $myRequest->replace(['email' => $userSocial->email, 'password'=>'test']);
-            $this->login($myRequest, 'byId', $usuario);
-            return redirect()->back();
+            return $this->login($myRequest, 'byId', $usuario);
+            //return redirect()->back();
         }
     }
 
@@ -63,14 +62,6 @@ class UsuarioController extends Controller
             else{
                 $res= Auth::loginUsingId($user->id);
             }
-            if(!$res->register_normal && $tipo=='normal'){
-                $resultado=[
-                    "status"=> "400",
-                    "mensaje"=> "Email or Password doesn't match",
-                    "datos"=> null
-                ];
-                return response()->json($resultado, 400);
-            }
             if(!$res){
                 $resultado=[
                     "status"=> "400",
@@ -80,6 +71,14 @@ class UsuarioController extends Controller
                 return response()->json($resultado, 400);
             }
             $user = Auth::user();
+            if(!$user->register_normal && $tipo=='normal'){
+                $resultado=[
+                    "status"=> "400",
+                    "mensaje"=> "Email or Password doesn't match",
+                    "datos"=> null
+                ];
+                return response()->json($resultado, 400);
+            }
             $dataUser=[
                 'id'=> $user->id,
                 'name'=> $user->name,

@@ -56,7 +56,13 @@
         </style>
     </head>
     <body>
+        {{$token}}
         <div id="index"></div>
     </body>
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript">
+        /*localStorage["appState"] = data.datos;
+        localStorage["dataUser"] = JSON.stringify(data.dataUser);*/
+        console.log(111);
+    </script>
 </html>

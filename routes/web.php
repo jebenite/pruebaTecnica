@@ -12,6 +12,6 @@
 */
 
 Route::get('{reactRoutes}', function () {
-    return view('welcome'); 
-})->where('reactRoutes', '^((?!api).)*$');
+    return view('welcome',["token"=>""]); 
+})->where('reactRoutes', '^((?!api).)*$')->name('welcome');
 

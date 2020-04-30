@@ -29,8 +29,10 @@ class Login extends Component {
       isLogginInNot: false,
       showModal: false,
       loadingLogin: false,
+      loadingLoginFacebook: false,
     };
     this.onFinish = this.onFinish.bind(this);
+    this.facebook = this.facebook.bind(this);
     this.showModal = this.showModal.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
 
@@ -40,6 +42,29 @@ class Login extends Component {
     this.setState({
       showModal: true
     })
+  }
+  async facebook() {
+    try {
+      this.setState({
+        loadingLoginFacebook: true
+      })
+      let res = await fetch(`${url}/api/auth/facebook`,{mode: 'no-cors'})
+      let data = await res.json();
+      if (data.status != 200) {
+        this.openNotification('Error', data.mensaje, true);
+      }
+      else {
+        await this.guardarStorage(data);
+        this.props.dispatch({type:'LOGEADO'});
+        this.openNotification('Success', data.mensaje, false);
+      }
+      this.setState({
+        loadingLoginFacebook: false
+      })
+    } catch (error) {
+      console.log(3333333);
+      this.openNotification('Error', 'Error ocurred!', true);
+    }
   }
   async onFinish(values) {
     try {
@@ -148,7 +173,7 @@ class Login extends Component {
                   Submit
               </Button>
               <Button type="link" onClick={this.showModal}>Update Password</Button>
-              <Button type="link" href='/api/auth/facebook'>Facebook</Button>
+              <Button type="link" onClick={this.facebook} loading={this.state.loadingLoginFacebook}>Facebook</Button>
               </Form.Item>
             </Form>
           </Card>
